@@ -17,20 +17,21 @@ public class TodoService implements ITodoService {
 
     @Override
     public Todo insert(long userId) {
-        User userFound = this.userService.get(userId);
-
-        if (userFound != null) {
-            Todo todo = new Todo();
-
-            todo.setTitle("Titolo");
-            todo.setDescription("Descrizione");
-            todo.setUser(userFound);
-
-            return this.todoRepository.save(todo);
-        }
-        else {
-            return null;
-        }
+//        User userFound = this.userService.get(userId);
+//
+//        if (userFound != null) {
+//            Todo todo = new Todo();
+//
+//            todo.setTitle("Titolo");
+//            todo.setDescription("Descrizione");
+//            todo.setUser(userFound);
+//
+//            return this.todoRepository.save(todo);
+//        }
+//        else {
+//            return null;
+//        }
+        return null;
     }
 
     @Override

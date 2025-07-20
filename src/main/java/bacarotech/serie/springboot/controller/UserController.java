@@ -1,5 +1,8 @@
 package bacarotech.serie.springboot.controller;
 
+import bacarotech.serie.springboot.dto.InsertUserDTO;
+import bacarotech.serie.springboot.dto.UpdateUserDTO;
+import bacarotech.serie.springboot.dto.UserDTO;
 import bacarotech.serie.springboot.model.User;
 import bacarotech.serie.springboot.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +17,44 @@ public class UserController {
     private IUserService userService;
 
     @PostMapping
-    public ResponseEntity<User> insertUser() {
-        return new ResponseEntity<>(this.userService.insert(), HttpStatus.OK);
+    public ResponseEntity<UserDTO> insertUser(
+            @RequestBody InsertUserDTO dto
+        ) {
+        return new ResponseEntity<>(this.userService.insert(dto), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUser(
+    public ResponseEntity<UserDTO> getUser(
             @PathVariable("id") long id
     ) {
-        User userFound = this.userService.get(id);
+        UserDTO userFound = this.userService.get(id);
 
         return userFound != null ?
-                new ResponseEntity<>(this.userService.get(id), HttpStatus.OK) :
+                new ResponseEntity<>(userFound, HttpStatus.OK) :
                 new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserDTO> updateUser(
+            @PathVariable("id") long id,
+            @RequestBody UpdateUserDTO dto
+        ) {
+        UserDTO userUpdated = this.userService.update(id, dto);
+
+        return userUpdated != null ?
+                new ResponseEntity<>(userUpdated, HttpStatus.OK) :
+                new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUser(
+            @PathVariable("id") long id
+    ) {
+        int count = this.userService.delete(id);
+
+        if (count == 1) return new ResponseEntity<>("User deleted", HttpStatus.OK);
+        else if (count == 0) return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+        else return new ResponseEntity<>("Error", HttpStatus.MULTI_STATUS);
     }
 
 }
