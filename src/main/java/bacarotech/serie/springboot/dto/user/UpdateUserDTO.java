@@ -1,4 +1,4 @@
-package bacarotech.serie.springboot.dto;
+package bacarotech.serie.springboot.dto.user;
 
 import bacarotech.serie.springboot.model.User;
 import com.fasterxml.jackson.annotation.JsonProperty;

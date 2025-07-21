@@ -1,11 +1,15 @@
 package bacarotech.serie.springboot.controller;
 
-import bacarotech.serie.springboot.model.Todo;
+import bacarotech.serie.springboot.dto.todo.InsertTodoDTO;
+import bacarotech.serie.springboot.dto.todo.TodoDTO;
+import bacarotech.serie.springboot.dto.todo.UpdateTodoDTO;
 import bacarotech.serie.springboot.service.ITodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/todos")
@@ -14,21 +18,55 @@ public class TodoController {
     private ITodoService todoService;
 
     @PostMapping("/user/{userId}")
-    public ResponseEntity<Todo> insertTodo(
-            @PathVariable("userId") long userId
-    ) {
-        return new ResponseEntity<>(this.todoService.insert(userId), HttpStatus.OK);
+    public ResponseEntity<TodoDTO> insertTodo(
+            @PathVariable("userId") long userId,
+            @RequestBody InsertTodoDTO dto
+            ) {
+        return new ResponseEntity<>(this.todoService.insert(userId, dto), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Todo> getTodo(
+    public ResponseEntity<TodoDTO> getTodo(
             @PathVariable("id") long id
     ) {
-        Todo todoFound = this.todoService.get(id);
+        TodoDTO todoFound = this.todoService.get(id);
 
         return todoFound != null ?
                 new ResponseEntity<>(todoFound, HttpStatus.OK) :
                 new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<TodoDTO>> getUserTodos(
+            @PathVariable("userId") long userId
+    ) {
+       List<TodoDTO> todos = this.todoService.getByUserId(userId);
+
+       return todos != null ?
+               new ResponseEntity<>(todos, HttpStatus.OK) :
+               new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TodoDTO> updateTodo(
+            @PathVariable("id") long id,
+            @RequestBody UpdateTodoDTO dto
+    ) {
+        TodoDTO todo = this.todoService.update(id, dto);
+
+        return todo != null ?
+                new ResponseEntity<>(todo, HttpStatus.OK) :
+                new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteTodo(
+            @PathVariable("id") long id
+    ) {
+        int count = this.todoService.delete(id);
+
+        if (count == 1) return new ResponseEntity<>("Todo deleted", HttpStatus.OK);
+        else if (count == 0) return new ResponseEntity<>("Todo not found", HttpStatus.NOT_FOUND);
+        else return new ResponseEntity<>("Error", HttpStatus.MULTI_STATUS);
+    }
 }

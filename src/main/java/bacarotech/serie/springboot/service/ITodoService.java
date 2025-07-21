@@ -1,10 +1,20 @@
 package bacarotech.serie.springboot.service;
 
-import bacarotech.serie.springboot.model.Todo;
+import bacarotech.serie.springboot.dto.todo.InsertTodoDTO;
+import bacarotech.serie.springboot.dto.todo.TodoDTO;
+import bacarotech.serie.springboot.dto.todo.UpdateTodoDTO;
+
+import java.util.List;
 
 public interface ITodoService {
 
-    public Todo insert(long userId);
+    public TodoDTO insert(long userId, InsertTodoDTO dto);
 
-    public Todo get(long id);
+    public TodoDTO get(long id);
+
+    public List<TodoDTO> getByUserId(long userId);
+
+    public TodoDTO update(long id, UpdateTodoDTO dto);
+
+    public int delete(long id);
 }

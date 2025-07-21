@@ -1,9 +1,8 @@
 package bacarotech.serie.springboot.controller;
 
-import bacarotech.serie.springboot.dto.InsertUserDTO;
-import bacarotech.serie.springboot.dto.UpdateUserDTO;
-import bacarotech.serie.springboot.dto.UserDTO;
-import bacarotech.serie.springboot.model.User;
+import bacarotech.serie.springboot.dto.user.InsertUserDTO;
+import bacarotech.serie.springboot.dto.user.UpdateUserDTO;
+import bacarotech.serie.springboot.dto.user.UserDTO;
 import bacarotech.serie.springboot.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

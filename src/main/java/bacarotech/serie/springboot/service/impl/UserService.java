@@ -1,8 +1,8 @@
 package bacarotech.serie.springboot.service.impl;
 
-import bacarotech.serie.springboot.dto.InsertUserDTO;
-import bacarotech.serie.springboot.dto.UpdateUserDTO;
-import bacarotech.serie.springboot.dto.UserDTO;
+import bacarotech.serie.springboot.dto.user.InsertUserDTO;
+import bacarotech.serie.springboot.dto.user.UpdateUserDTO;
+import bacarotech.serie.springboot.dto.user.UserDTO;
 import bacarotech.serie.springboot.model.User;
 import bacarotech.serie.springboot.repository.UserRepository;
 import bacarotech.serie.springboot.service.IUserService;
@@ -30,6 +30,10 @@ public class UserService implements IUserService {
         return user != null ?
                 UserDTO.fromUser(user) :
                 null;
+    }
+
+    protected User getUser(long id) {
+        return this.userRepository.findById(id).orElse(null);
     }
 
     @Override
