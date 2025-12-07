@@ -10,6 +10,15 @@ services:
       - 5432:5432
     volumes:
       - db_postgres_data:/var/lib/postgresql/data
+  be:
+    container_name: be
+    build:
+      context: .
+    image: seriespringboot-be
+    env_file:
+      - be.env
+    ports:
+      - 8080:8080
 
 volumes:
   db_postgres_data:
