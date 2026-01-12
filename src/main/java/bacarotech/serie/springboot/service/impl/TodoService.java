@@ -1,5 +1,6 @@
 package bacarotech.serie.springboot.service.impl;
 
+import bacarotech.serie.springboot.PaginationDTO;
 import bacarotech.serie.springboot.dto.todo.InsertTodoDTO;
 import bacarotech.serie.springboot.dto.todo.TodoDTO;
 import bacarotech.serie.springboot.dto.todo.UpdateTodoDTO;
@@ -8,6 +9,8 @@ import bacarotech.serie.springboot.model.User;
 import bacarotech.serie.springboot.repository.TodoRepository;
 import bacarotech.serie.springboot.service.ITodoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,14 +45,14 @@ public class TodoService implements ITodoService {
     }
 
     @Override
-    public List<TodoDTO> getByUserId(long userId) {
+    public PaginationDTO<TodoDTO> getByUserId(long userId, int pageSize, int pageNumber) {
         User userFound = this.userService.getUser(userId);
 
         if (userFound == null) return null;
 
-        List<Todo> todos = this.todoRepository.findByUser(userFound);
+        Page<Todo> todos = this.todoRepository.findByUser(userFound, PageRequest.of(pageNumber, pageSize));
 
-        return todos.stream().map(TodoDTO::fromTodo).toList();
+        return PaginationDTO.fromPage(todos, TodoDTO::fromTodo);
     }
 
     @Override

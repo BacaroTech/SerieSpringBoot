@@ -1,5 +1,6 @@
 package bacarotech.serie.springboot.controller;
 
+import bacarotech.serie.springboot.PaginationDTO;
 import bacarotech.serie.springboot.dto.todo.InsertTodoDTO;
 import bacarotech.serie.springboot.dto.todo.TodoDTO;
 import bacarotech.serie.springboot.dto.todo.UpdateTodoDTO;
@@ -37,10 +38,12 @@ public class TodoController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<TodoDTO>> getUserTodos(
-            @PathVariable("userId") long userId
+    public ResponseEntity<PaginationDTO<TodoDTO>> getUserTodos(
+            @PathVariable("userId") long userId,
+            @RequestParam(value = "pageSize", required = true) Integer pageSize,
+            @RequestParam(value = "pageNumber", required = true) Integer pageNumber
     ) {
-       List<TodoDTO> todos = this.todoService.getByUserId(userId);
+        PaginationDTO<TodoDTO> todos = this.todoService.getByUserId(userId, pageSize, pageNumber);
 
        return todos != null ?
                new ResponseEntity<>(todos, HttpStatus.OK) :

@@ -3,6 +3,8 @@ package bacarotech.serie.springboot.repository;
 import bacarotech.serie.springboot.model.Todo;
 import bacarotech.serie.springboot.model.User;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -14,7 +16,7 @@ import java.util.List;
 @Repository
 public interface TodoRepository extends JpaRepository<Todo, Long> {
 
-    public List<Todo> findByUser(User user);
+    public Page<Todo> findByUser(User user, Pageable pageable);
 
     @Modifying
     @Transactional
