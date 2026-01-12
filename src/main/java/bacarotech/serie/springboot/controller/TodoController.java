@@ -40,8 +40,8 @@ public class TodoController {
     @GetMapping("/user/{userId}")
     public ResponseEntity<PaginationDTO<TodoDTO>> getUserTodos(
             @PathVariable("userId") long userId,
-            @RequestParam(value = "pageSize", required = true) Integer pageSize,
-            @RequestParam(value = "pageNumber", required = true) Integer pageNumber
+            @RequestParam(value = "pageSize", required = true) int pageSize,
+            @RequestParam(value = "pageNumber", required = true) int pageNumber
     ) {
         PaginationDTO<TodoDTO> todos = this.todoService.getByUserId(userId, pageSize, pageNumber);
 
