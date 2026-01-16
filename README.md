@@ -39,6 +39,14 @@ Il database sarà disponibile sulla porta **5432**.
 - **Docker & Docker Compose**
 - IDE a scelta (IntelliJ IDEA consigliato)
 
+## Social e Contatti
+Se hai dei consigli facci sapere!
+- 🌳 [Linkedin](https://www.linkedin.com/company/bacarotech)
+- 📷 [Instagram](https://www.instagram.com/bacarotechofficial/)
+- 🎵 [TikTok](https://www.tiktok.com/@bacarotech)
+- 🎥 [Youtube](https://www.youtube.com/@Bacarotech)
+- 📫 Email: **bacarotech@gmail.com**
+
 ---
 
 ## 📺 Risorse utili
