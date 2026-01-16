@@ -1,6 +1,6 @@
 package bacarotech.serie.springboot.service.impl;
 
-import bacarotech.serie.springboot.PaginationDTO;
+import bacarotech.serie.springboot.dto.PaginationDTO;
 import bacarotech.serie.springboot.dto.todo.InsertTodoDTO;
 import bacarotech.serie.springboot.dto.todo.TodoDTO;
 import bacarotech.serie.springboot.dto.todo.UpdateTodoDTO;
@@ -12,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class TodoService implements ITodoService {

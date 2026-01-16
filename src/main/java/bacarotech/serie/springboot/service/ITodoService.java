@@ -1,11 +1,9 @@
 package bacarotech.serie.springboot.service;
 
-import bacarotech.serie.springboot.PaginationDTO;
+import bacarotech.serie.springboot.dto.PaginationDTO;
 import bacarotech.serie.springboot.dto.todo.InsertTodoDTO;
 import bacarotech.serie.springboot.dto.todo.TodoDTO;
 import bacarotech.serie.springboot.dto.todo.UpdateTodoDTO;
-
-import java.util.List;
 
 public interface ITodoService {
 

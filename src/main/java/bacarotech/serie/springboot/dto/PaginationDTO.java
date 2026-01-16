@@ -1,4 +1,4 @@
-package bacarotech.serie.springboot;
+package bacarotech.serie.springboot.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.domain.Page;

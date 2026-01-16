@@ -1,6 +1,6 @@
 package bacarotech.serie.springboot.controller;
 
-import bacarotech.serie.springboot.PaginationDTO;
+import bacarotech.serie.springboot.dto.PaginationDTO;
 import bacarotech.serie.springboot.dto.todo.InsertTodoDTO;
 import bacarotech.serie.springboot.dto.todo.TodoDTO;
 import bacarotech.serie.springboot.dto.todo.UpdateTodoDTO;
@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/todos")
