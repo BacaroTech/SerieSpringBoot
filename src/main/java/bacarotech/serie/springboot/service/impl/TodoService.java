@@ -9,6 +9,9 @@ import bacarotech.serie.springboot.model.User;
 import bacarotech.serie.springboot.repository.TodoRepository;
 import bacarotech.serie.springboot.service.ITodoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -23,6 +26,7 @@ public class TodoService implements ITodoService {
 
 
     @Override
+    @CachePut(value = "${todo.cache}", key = "#result?.id()", unless = "#result == null")
     public TodoDTO insert(long userId, InsertTodoDTO dto) {
         User userFound = this.userService.getUser(userId);
 
@@ -34,6 +38,7 @@ public class TodoService implements ITodoService {
     }
 
     @Override
+    @Cacheable(value = "${todo.cache}", key = "#id", unless = "#result == null")
     public TodoDTO get(long id) {
         Todo todo = this.todoRepository.findById(id).orElse(null);
 
@@ -54,6 +59,7 @@ public class TodoService implements ITodoService {
     }
 
     @Override
+    @CachePut(value = "${todo.cache}", key = "#result?.id()", unless = "#result == null")
     public TodoDTO update(long id, UpdateTodoDTO dto) {
         Todo todo = this.todoRepository.findById(id).orElse(null);
 
@@ -65,6 +71,7 @@ public class TodoService implements ITodoService {
     }
 
     @Override
+    @CacheEvict(value = "${todo.cache}", key = "#id")
     public int delete(long id) {
         return this.todoRepository.delete(id);
     }
